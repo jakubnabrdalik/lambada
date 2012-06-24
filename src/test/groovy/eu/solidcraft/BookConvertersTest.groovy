@@ -1,11 +1,12 @@
 
 package eu.solidcraft
 
+import ch.lambdaj.function.argument.ArgumentConversionException
 import eu.solidcraft.domain.Book
 import eu.solidcraft.domain.Chapter
 import eu.solidcraft.dtos.BookDto
-import spock.lang.Specification
 import eu.solidcraft.dtos.ChapterDto
+import spock.lang.Specification
 import spock.lang.Unroll
 
 class BookConvertersTest extends Specification {
@@ -28,7 +29,7 @@ class BookConvertersTest extends Specification {
         new Chapter("title $bookI, $i", "text $bookI, $i")
     }
 
-    @Unroll("test converter for #converter.class")
+    @Unroll("#converter.class.getSimpleName() converts well")
     def "Converters should convert" () {
         expect:
             dtos == converter.convertToDtos(booksToConvert)
@@ -37,9 +38,16 @@ class BookConvertersTest extends Specification {
             converter                             | dtos
             new ClassicJavaBookConverter()        | expectedDtos
             new GuavaBookConverter()              | expectedDtos
-//          new NaiveLambdajBookConverter()       | expectedDtos
             new NaiveGroovyBookConverter()        | expectedDtos
             new RealGroovyBookConverter()         | expectedDtos
             new EvenMoreRealGroovyBookConverter() | expectedDtos
+    }
+
+    def "LambdaJ has it's limitations"() {
+        when:
+            new NaiveLambdajBookConverter().convertToDtos(booksToConvert)
+
+        then:
+            thrown(ArgumentConversionException)
     }
 }

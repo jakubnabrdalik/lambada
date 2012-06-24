@@ -24,17 +24,17 @@ public class ClassicJavaBookConverter {
         return bookDtos;
     }
 
+    private BookDto convertBookDto(Book book) {
+        return new BookDto().
+                withId(book.getId()).
+                withTitle(book.getTitle()).
+                withAuthor(book.getAuthor()).
+                withIsbn(book.getIsbn());
+    }
+
     private void convertChapterDto(List<ChapterDto> chapterDtos, Chapter chapter) {
         chapterDtos.add(
                 new ChapterDto(chapter.getTitle(), chapter.getText())
         );
-    }
-
-    private BookDto convertBookDto(Book book) {
-        return new BookDto().
-                        withId(book.getId()).
-                        withTitle(book.getTitle()).
-                        withAuthor(book.getAuthor()).
-                        withIsbn(book.getIsbn());
     }
 }
