@@ -13,28 +13,25 @@ public class ClassicJavaBookConverter {
     public List<BookDto> convertToDtos(List<Book> books) {
         List<BookDto> bookDtos = new ArrayList<>();
         for(Book book : books) {
-            BookDto bookDto = convertBookDto(book);
-            List<ChapterDto> chapterDtos = new ArrayList<>();
-            for(Chapter chapter : book.getChapters()) {
-                convertChapterDto(chapterDtos, chapter);
-            }
-            bookDto.withChapters(chapterDtos);
-            bookDtos.add(bookDto);
+            bookDtos.add(convertBookDto(book));
         }
         return bookDtos;
     }
 
     private BookDto convertBookDto(Book book) {
-        return new BookDto().
-                withId(book.getId()).
-                withTitle(book.getTitle()).
-                withAuthor(book.getAuthor()).
-                withIsbn(book.getIsbn());
+        return new BookDto( book.getId(), book.getTitle(), book.getAuthor(),
+                book.getIsbn(), convertChapterDtos(book.getChapters()));
     }
 
-    private void convertChapterDto(List<ChapterDto> chapterDtos, Chapter chapter) {
-        chapterDtos.add(
-                new ChapterDto(chapter.getTitle(), chapter.getText())
-        );
+    private List<ChapterDto> convertChapterDtos(List<Chapter> chapters) {
+        List<ChapterDto> chapterDtos = new ArrayList<>();
+        for(Chapter chapter : chapters) {
+            chapterDtos.add(convertChapterDto(chapter));
+        }
+        return chapterDtos;
+    }
+
+    private ChapterDto convertChapterDto(Chapter chapter) {
+        return new ChapterDto(chapter.getTitle(), chapter.getText());
     }
 }

@@ -7,6 +7,8 @@ import eu.solidcraft.dtos.BookDto
 import eu.solidcraft.dtos.ChapterDto
 
 public class RealGroovyBookConverter {
+
+
     public List<BookDto> convertToDtos(List<Book> books) {
         return books.collect { Book book ->
             new BookDto(book.id, book.title, book.author, book.isbn,
@@ -16,4 +18,6 @@ public class RealGroovyBookConverter {
             )
         }
     }
+
+
 }

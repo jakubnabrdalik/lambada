@@ -1,12 +1,14 @@
+package eu.solidcraft;
 
-package eu.solidcraft
+import eu.solidcraft.domain.Book;
+import eu.solidcraft.domain.Chapter;
+import eu.solidcraft.dtos.BookDto;
+import eu.solidcraft.dtos.ChapterDto;
 
-import eu.solidcraft.domain.Book
-import eu.solidcraft.domain.Chapter
-import eu.solidcraft.dtos.BookDto
-import eu.solidcraft.dtos.ChapterDto
+import java.util.ArrayList;
+import java.util.List;
 
-public class NaiveGroovyBookConverter {
+public class OldJavaBookConverter {
 
     public List<BookDto> convertToDtos(List<Book> books) {
         List<BookDto> bookDtos = new ArrayList<>();
@@ -17,7 +19,7 @@ public class NaiveGroovyBookConverter {
                 chapterDtos.add(chapterDto);
             }
             BookDto bookDto = new BookDto( book.getId(), book.getTitle(), book.getAuthor(),
-                    book.getIsbn(), chapterDtos);
+                                           book.getIsbn(), chapterDtos);
             bookDtos.add(bookDto);
         }
         return bookDtos;

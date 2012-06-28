@@ -12,11 +12,13 @@
         <guava.version>12.0</guava.version>
     </properties>
   <dependencies>
+
       <dependency>
           <groupId>com.googlecode.lambdaj</groupId>
           <artifactId>lambdaj</artifactId>
           <version>${lambdaj.version}</version>
       </dependency>
+
       <dependency>
           <groupId>com.google.guava</groupId>
           <artifactId>guava</artifactId>
@@ -37,12 +39,14 @@
       </dependency>
 
       <!-- Groovy + ant plugin for compilation -->
+
       <dependency>
           <groupId>groovy</groupId>
           <artifactId>groovy-all-1.0-jsr</artifactId>
           <version>06</version>
       </dependency>
-  </dependencies>
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>
